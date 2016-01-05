@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>3 mixed memo will be nice idea</h1>
+
+<p>Three memos will be apper here</p>
+<div class="random">
+  <% @ideas.sample(3).each do |samp| %>
+    <p><%= samp.memo %></p>
+  <% end %>
+</div>
+
+<h2>
+<%= link_to 'New Memo', new_idea_path %>
+</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Memo</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ideas.each do |idea| %>
+      <tr>
+        <td><%= idea.memo %></td>
+        <td><%= link_to 'Show', idea %></td>
+        <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
+        <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
