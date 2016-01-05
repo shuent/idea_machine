@@ -4,7 +4,14 @@
   <strong>Memo:</strong>
   <%= @idea.memo %>
 </p>
-<p>by <%= link_to @idea.user.name, @idea.user %></p>
+<p>by 
+<% if @idea.user %>
+	<%= @idea.user.email %>
+<% else %>
+ Unknown
+<% end %>
+
+</p>
 
 <%= link_to 'Edit', edit_idea_path(@idea) %> |
 <%= link_to 'Back', ideas_path %>

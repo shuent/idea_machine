@@ -1,5 +1,7 @@
 class IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :yourself, only: [:edit, :update, :destroy]
 
   # GET /ideas
   # GET /ideas.json
@@ -26,6 +28,7 @@ class IdeasController < ApplicationController
   # POST /ideas.json
   def create
     @idea = Idea.new(idea_params)
+    @idea.user_id = current_user.id
 
     respond_to do |format|
       if @idea.save
@@ -71,5 +74,9 @@ class IdeasController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def idea_params
       params.require(:idea).permit(:memo,:user_id)
+    end
+
+    def yourself
+      raise Forbidden unless @idea.user == current_user
     end
 end

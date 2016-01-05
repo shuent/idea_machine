@@ -1,6 +1,11 @@
 <header>
 	<ul>
 		<li><%= link_to "Ideas",:ideas %></li>
-		<li><%= link_to "User",:users %></li>
+		<li><%= link_to "My_page", "#" %></li>
+		<% if current_user %>
+			<li><%= link_to "Sign Out",:destroy_user_session, method: :delete %></li>
+		<% else %>
+			<li><%= link_to "Sign In",:new_user_session %></li>
+		<% end %>
 	</ul>
 </header>
